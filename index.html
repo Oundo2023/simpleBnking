@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Banking System</title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            width: 400px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: scale(1.02);
+            background: #5a67d8;
+        }
+        
+        .register-btn {
+            background: #48bb78;
+        }
+        
+        .register-btn:hover {
+            background: #38a169;
+        }
+        
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .success {
+            background: #c6f6d5;
+            color: #22543d;
+            display: block;
+        }
+        
+        .error {
+            background: #fed7d7;
+            color: #742a2a;
+            display: block;
+        }
+        
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏦 Simple Banking</h1>
+        <div class="subtitle">Secure Mobile Banking</div>
+        
+        <div id="message" class="message"></div>
+        
+        <form action="LoginServlet" method="post">
+            <input type="text" name="accountNumber" placeholder="Account Number" required>
+            <input type="password" name="pin" placeholder="PIN" maxlength="4" required>
+            <input type="hidden" name="action" value="login">
+            <button type="submit">🔐 LOGIN</button>
+        </form>
+        
+        <button class="register-btn" onclick="location.href='register.html'">📝 CREATE NEW ACCOUNT</button>
+    </div>
+    
+    <script>
+        // Show message if from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error')) {
+            const msgDiv = document.getElementById('message');
+            msgDiv.textContent = '❌ Invalid account number or PIN!';
+            msgDiv.className = 'message error';
+        }
+        if (urlParams.has('success')) {
+            const msgDiv = document.getElementById('message');
+            msgDiv.textContent = '✅ Account created successfully! Please login.';
+            msgDiv.className = 'message success';
+        }
+    </script>
+</body>
+</html>
