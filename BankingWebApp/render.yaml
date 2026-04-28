@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: banking-system
+    runtime: php
+    buildCommand: ""
+    startCommand: "apache2ctl -D FOREGROUND"
+    envVars:
+      - key: PHP_VERSION
+        value: 8.2
+    plan: free
